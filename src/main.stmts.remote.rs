@@ -46,9 +46,4 @@ async fn main() {
     }
     let duration = start.elapsed();
     println!("Added {:?} rows to table in {:?}", q_size, duration);
-
-    // let mut count_stmt = conn.prepare("select count(?) from todos").await.unwrap();
-    // let mut result = count_stmt.query(["*"]).await.unwrap();
-    // let rows = result.next().unwrap().unwrap();
-    // println!("Added count: {:?}", rows.get_value(0))
 }
