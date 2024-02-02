@@ -15,6 +15,7 @@
     "short-number": "^1.0.7"
   },
   "devDependencies": {
+    "dotenv": "^16.4.1",
     "tsx": "^4.7.0"
   }
 }

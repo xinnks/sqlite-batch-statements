@@ -1,6 +1,6 @@
 // USING PREPARED STATEMENTS
 
-import Database from "libsql";
+import Database from "libsql/promise";
 import readline from "readline";
 import { stdin as input, stdout as output } from "process";
 import shortNumber from "short-number";
@@ -22,21 +22,21 @@ async function createSchema(db) {
 
 async function runQueries(size: number) {
   const dbNameString = shortNumber(size);
-  const db = new Database(`dbs/test-p-${dbNameString}.db`);
+  const db = new Database(`dbs/test-p-${dbNameString}.db`, {});
 
   await createSchema(db);
   const limit = Array.from(Array(size).keys());
 
-  const stmt = (i: any) =>
-    db.prepare(`insert into todos values ("do task no. ${i}")`);
+  const stmt = await db.prepare(`insert into todos values ("do task no. ?")`);
 
   const startTime = Date.now();
   for (const i of limit) {
-    stmt(i).run();
+    stmt.run(1);
   }
   console.log(`Added ${size} tasks in ${Date.now() - startTime}ms!`);
 
-  const results = db.prepare("select count(*) from todos").get();
+  const response = await db.prepare("select count(*) from todos");
+  const results = response.get(1);
 
   console.log(`Items in db: `, JSON.stringify({ results }));
 

@@ -37,5 +37,9 @@ async function runQueries(size: number) {
     });
   }
   console.log(`Added batch of ${size} tasks in ${Date.now() - startTime}ms!`);
+
+  const { rows } = await db.execute("select count(*) from todos");
+
+  console.log(`Items in db: `, JSON.stringify({ rows }));
   process.exit();
 }
