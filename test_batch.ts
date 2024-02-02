@@ -29,11 +29,10 @@ async function runQueries(size: number) {
   await createSchema(db);
   const limit = Array.from(Array(size).keys());
   console.log(`Inserting ${size} items to 'todos' table...`);
+  const statements = limit.map(
+    (i) => `insert into todos values ('do task no. ${i}')`
+  );
   const startTime = Date.now();
-  const statements = limit.map((i) => ({
-    sql: 'insert into todos values ("do task no. ?")',
-    args: [i],
-  }));
   await db.batch(statements, "write");
   console.log(`Added batch of ${size} tasks in ${Date.now() - startTime}ms!`);
   process.exit();

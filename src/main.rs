@@ -39,7 +39,7 @@ async fn main() {
     let mut stmts = vec![];
     stmts.push("begin".to_string());
     for i in 1..(q_size + 1) {
-        let curr_stmt = format!("insert into todos values \"do task no. {i}\"");
+        let curr_stmt = format!("insert into todos values (\"do task no. {i}\")");
         stmts.push(curr_stmt.to_string());
     }
     stmts.push("end;".to_string());
