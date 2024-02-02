@@ -1,3 +1,5 @@
+// REGULAR LOOP THROUGH STATEMENTS
+
 import { type Client, createClient } from "@libsql/client";
 import readline from "readline";
 import { stdin as input, stdout as output } from "process";
