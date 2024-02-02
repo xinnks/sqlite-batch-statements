@@ -38,14 +38,3 @@ async function runQueries(size: number) {
   console.log(`Added batch of ${size} tasks in ${Date.now() - startTime}ms!`);
   process.exit();
 }
-/**
- * {
- * 100 -> 6ms, 6ms
- * 1000 -> 43ms, 41ms
- * 10000 -> 269ms, 276ms
- * 100000 -> 2487ms, 2620ms
- * 1000000 -> 25788ms, 25441ms
- * 10000000 -> 329022ms
- * 100000000 -> 340817ms
- * }
- */
