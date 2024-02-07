@@ -1,4 +1,4 @@
-// USING PREPARED STATEMENTS
+// USING BATCH STATEMENTS
 
 use libsql::Database;
 use std::{io, time::Instant};
@@ -25,29 +25,34 @@ async fn main() {
 
     let q_short = shorten_number(q_size as f32).to_string();
 
-    let db_name = format!("dbs/test-p-rs-{q_short}.db");
+    let db_name = format!("dbs/test-b-rs-{q_short}.db");
     let db = Database::open(db_name).unwrap();
 
     let conn = db.connect().unwrap();
-    let _result = conn
-        .execute(
-            "create table if not exists todos (task varchar non null)",
-            (),
-        )
-        .await
-        .unwrap();
+    conn.execute(
+        "create table if not exists todos (task varchar non null)",
+        (),
+    )
+    .await
+    .unwrap();
 
-    let mut stmt = conn
-        .prepare("insert into todos (task) VALUES (?)")
-        .await
-        .unwrap();
+    let mut stmts = vec![];
+    stmts.push("begin".to_string());
+    for i in 1..(q_size + 1) {
+        let curr_stmt = format!("insert into todos values (\"do task no. {i}\")");
+        stmts.push(curr_stmt.to_string());
+    }
+    stmts.push("end;".to_string());
+
+    let stmts = stmts.join(";");
+    // println!("all statements are {}", stmts.as_str());
 
     let start = Instant::now();
-    for i in 1..(q_size + 1) {
-        let _response = stmt.execute([i]).await;
-    }
+    let _result = conn.execute_batch(&stmts).await;
+    // println!("Added count: {:?}", _result);
+
     let duration = start.elapsed();
-    println!("Time taken to insert data: {:?}", duration);
+    println!("Added {:?} rows to table in {:?}", q_size, duration);
 
     let mut count_stmt = conn.prepare("select count(*) from todos").await.unwrap();
     let mut result = count_stmt.query([""]).await.unwrap();

@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "batch": "tsx batch",
+    "batch:remote": "tsx batch_remote",
+    "stmt": "tsx stmt",
+    "stmt:remote": "tsx stmt_remote",
+    "antipat:interactive": "tsx antipat_interactive_transaction",
+    "antipat:regular": "tsx antipat_regular_transaction"
   },
   "keywords": [],
   "author": "",
