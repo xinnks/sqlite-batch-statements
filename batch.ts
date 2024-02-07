@@ -1,5 +1,7 @@
 // USING BATCH STATEMENTS
 
+// $ npm run batch
+
 import { type Client, createClient } from "@libsql/client";
 import readline from "readline";
 import { stdin as input, stdout as output } from "process";

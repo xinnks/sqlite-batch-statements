@@ -1,5 +1,7 @@
 // USING BATCH STATEMENTS WITH REMOTE DB
 
+// $ npm run batch:remote
+
 import dotenv from "dotenv";
 import { type Client, createClient } from "@libsql/client";
 import readline from "readline";

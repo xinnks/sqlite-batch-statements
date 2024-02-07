@@ -10,7 +10,8 @@
     "stmt": "tsx stmt",
     "stmt:remote": "tsx stmt_remote",
     "antipat:interactive": "tsx antipat_interactive_transaction",
-    "antipat:regular": "tsx antipat_regular_transaction"
+    "antipat:regular": "tsx antipat_regular_transaction",
+    "pat:dep-batch": "tsx dependent_batch"
   },
   "keywords": [],
   "author": "",

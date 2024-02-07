@@ -1,5 +1,7 @@
 // USING BATCH STATEMENTS
 
+// $ cargo run --example batch
+
 use libsql::Database;
 use std::{io, time::Instant};
 

@@ -1,6 +1,6 @@
-// USING INTERACTIVE TRANSACTIONS
+// DEPENDENT BATCH
 
-// $ npm run antipat:interactive
+// $ npm run pat:dep-batch
 
 import { type Client, createClient } from "@libsql/client";
 import readline from "readline";
@@ -35,10 +35,9 @@ async function runQueries(timeout: number) {
   await createSchema(db);
 
   const startTime = Date.now();
-  const transaction = await db.transaction("write");
 
   const id = Math.random() * 100 + 1;
-  await transaction.execute({
+  await db.execute({
     sql: "insert into users values (?, ?)",
     args: ["Bob", id],
   });
@@ -49,13 +48,18 @@ async function runQueries(timeout: number) {
   });
   console.log("completed expensive job");
 
-  await transaction.executeMultiple(
-    `insert into tasks values ("Go to the gym", ${id});
-    insert into tasks values ("Go buy some groceries", ${id})`
-  );
-  await transaction.commit();
+  await db.batch([
+    {
+      sql: "insert into tasks values (?, ?)",
+      args: ["Go to the gym", id],
+    },
+    {
+      sql: "insert into tasks values (?, ?)",
+      args: ["Go buy some groceries", id],
+    },
+  ]);
   console.log(
-    `Completed interactive transaction that takes > ${timeout} milliseconds ${
+    `Completed dependent batch that takes > ${timeout} milliseconds ${
       Date.now() - startTime
     }ms!`
   );

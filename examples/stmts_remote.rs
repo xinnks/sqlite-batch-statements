@@ -1,5 +1,7 @@
 // REGULAR LOOP THROUGH STATEMENTS
 
+// $ cargo run --example stmts_remote
+
 use libsql::{params, Database};
 use std::{io, time::Instant};
 

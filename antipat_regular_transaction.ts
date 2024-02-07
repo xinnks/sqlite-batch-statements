@@ -1,5 +1,6 @@
 // REGULAR TRANSACTION
-// Run: npm run antipat:regular
+
+// $ npm run antipat:regular
 
 import { type Client, createClient } from "@libsql/client";
 import readline from "readline";
@@ -35,7 +36,7 @@ async function runQueries() {
   console.log(
     `Added 1 task in ${
       Date.now() - startTime
-    }ms while interactie transaction was running!`
+    }ms while a parallel high-latency transaction was running!`
   );
 
   const { rows } = await db.execute("select count(*) from todos");

@@ -1,5 +1,7 @@
 // USING BATCH STATEMENTS ON REMOTE DATABASE
 
+// $ cargo run --example batch_remote
+
 use libsql::Database;
 use std::{io, time::Instant};
 

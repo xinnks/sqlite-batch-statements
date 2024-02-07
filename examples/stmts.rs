@@ -1,5 +1,7 @@
 // REGULAR LOOP THROUGH STATEMENTS
 
+// $ cargo run --example stmts
+
 use libsql::Database;
 use std::{io, time::Instant};
 
