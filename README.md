@@ -4,6 +4,11 @@ Benchmarking regular statements and batches in SQLite.
 
 ## Running benchmarks
 
+> [!IMPORTANT]  
+> To perform remote tests "_remote" for Rust and ":remote" for TS, make sure you
+> rename the `.env.example` file to `.env` and populate it with the credentials
+> of a Turso database.
+
 ### Using the rust SDK
 
 ```sh
@@ -32,7 +37,8 @@ Run interactive transaction:
 npm run antipat:interactive
 ```
 
-Then, pass a value >10000 or time in miliseconds that's enough for you to run the proceeding 👇 example.
+Then, pass a value >10000 or time in miliseconds that's enough for you to run
+the proceeding 👇 example.
 
 While the above interactive transaction is ongoing, run the following command:
 
